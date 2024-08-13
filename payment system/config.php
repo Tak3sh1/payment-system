@@ -1,5 +1,4 @@
 <?php
-// Configuração e conexão com o banco de dados
 $dsn = 'mysql:host=localhost;dbname=bd_pagamentoo';
 $usuario = 'root';
 $senha = 'root';
@@ -12,11 +11,10 @@ try {
     exit();
 }
 
-// Definindo a consulta SQL
-$sql = 'SELECT * FROM tb_beneficiario'; // Nome da tabela para a consulta
+$sql = 'SELECT * FROM tb_beneficiario'; 
 
 try {
-    $consulta = $pdo->query($sql); // Executa a consulta e retorna um PDOStatement
+    $consulta = $pdo->query($sql); 
 } catch (PDOException $e) {
     echo 'Erro na consulta: ' . $e->getMessage();
     exit();
