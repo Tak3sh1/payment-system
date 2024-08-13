@@ -1,9 +1,7 @@
 <?php
-include('conexao.php'); // Inclui o arquivo de conexão com o banco de dados
+include('conexao.php'); 
 
-// Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Receber e sanitizar os dados do formulário
     $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : '';
     $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
     $valor = isset($_POST['valor']) ? $_POST['valor'] : 0.00;
@@ -11,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $beneficiario = isset($_POST['beneficiario']) ? $_POST['beneficiario'] : null;
     $status = isset($_POST['status']) ? $_POST['status'] : '';
 
-    // Preparar a consulta SQL para inserção
     $sql = "INSERT INTO tb_pagar (nm_tipo, ds_descricao, vl_valor, nm_metodo_pagar, nm_status)
             VALUES (:tipo, :descricao, :valor, :metodo_pagamento, :status)";
 
@@ -24,10 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':status', $status);
         $stmt->execute();
 
-        // Obter o ID do pagamento inserido
         $id_pagamento = $PDO->lastInsertId();
 
-        // Atualizar a tabela tb_beneficiario para associar o beneficiário
         if ($beneficiario) {
             $sql_update = "UPDATE tb_beneficiario SET fk_id_pagamento = :id_pagamento WHERE id_beneficiario = :beneficiario";
             $stmt_update = $PDO->prepare($sql_update);
@@ -36,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_update->execute();
         }
 
-        header('Location: index.php'); // Redirecionar de volta para a página principal
+        header('Location: index.php');
         exit;
     } catch (PDOException $e) {
         echo 'Erro ao gravar dados: ' . $e->getMessage();
