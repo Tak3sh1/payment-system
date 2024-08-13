@@ -1,5 +1,5 @@
 <?php
-include('conexao.php'); // Inclui o arquivo de conexão com o banco de dados
+include('conexao.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,7 +26,6 @@ h1{
     text-align: center;
 }
 
-/* Container principal */
 .container {
     width: 80%;
     max-width: 1200px;
@@ -37,7 +36,6 @@ h1{
     box-sizing: border-box;
 }
 
-/* Estilo do cabeçalho */
 .header {
     text-align: center;
     margin-bottom: 20px;
@@ -49,7 +47,6 @@ h1{
     margin: 0;
 }
 
-/* Estilo do formulário */
 .quadro {
     margin-bottom: 20px;
     padding: 20px;
@@ -106,7 +103,6 @@ input[type="submit"]:hover, input[type="button"]:hover {
     transform: scale(1.05);
 }
 
-/* Estilo do botão de deletar */
 .btn-deletar {
     background-color: #e74c3c;
     color: #fff;
@@ -122,7 +118,6 @@ input[type="submit"]:hover, input[type="button"]:hover {
     transform: scale(1.05);
 }
 
-/* Estilo da tabela */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -154,7 +149,6 @@ td:hover {
     background-color: #dda0dd;
 }
 
-/* Ações */
 .acoes {
     display: flex;
     gap: 10px;
@@ -230,7 +224,6 @@ td:hover {
                 </tr>
                 <?php
                 try {
-                    // Corrigindo a consulta para trazer os dados corretos
                     $consulta = $PDO->query("SELECT tp.*, tb.nm_beneficiario 
                                              FROM tb_pagar tp 
                                              LEFT JOIN tb_beneficiario tb ON tb.fk_id_pagamento = tp.id_pagamento");
