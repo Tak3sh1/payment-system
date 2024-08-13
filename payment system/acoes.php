@@ -1,11 +1,10 @@
 <?php
-include('conexao.php'); // Inclui o arquivo de conexão
+include('conexao.php'); 
 
 if (isset($_POST['excluir_id'])) {
     $id_pagamento = $_POST['excluir_id'];
     
     try {
-        // Deleta o registro
         $sql = "DELETE FROM tb_pagar WHERE id_pagamento = :id_pagamento";
         $stmt = $PDO->prepare($sql);
         $stmt->bindParam(':id_pagamento', $id_pagamento);
