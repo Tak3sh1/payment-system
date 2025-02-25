@@ -1,0 +1,29 @@
+-- Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS bd_pagamentoo;
+USE bd_pagamentoo;
+
+-- Criação da tabela tb_pagar
+CREATE TABLE IF NOT EXISTS tb_pagar (
+  id_pagamento INT PRIMARY KEY AUTO_INCREMENT,
+  nm_tipo ENUM('entrada', 'saida') NOT NULL,
+  ds_descricao TEXT NOT NULL,
+  vl_valor DECIMAL(10,2) NOT NULL,
+  nm_metodo_pagar ENUM('Credito', 'Debito', 'Pix', 'Dinheiro') NOT NULL,
+  nm_status ENUM('Liquido', 'Em aberto', 'Em atraso') NOT NULL
+);
+
+-- Criação da tabela tb_beneficiario
+CREATE TABLE IF NOT EXISTS tb_beneficiario (
+  id_beneficiario INT PRIMARY KEY AUTO_INCREMENT,
+  nm_beneficiario VARCHAR(60) NOT NULL,
+  fk_id_pagamento INT,
+  FOREIGN KEY (fk_id_pagamento) REFERENCES tb_pagar(id_pagamento) ON DELETE SET NULL
+);
+
+-- Inserir dados na tabela tb_beneficiario
+INSERT INTO tb_beneficiario (nm_beneficiario) VALUES
+('Eduarda'), ('Ana'), ('Takeshi'), ('Manuela');
+
+-- Exemplo de inserção na tabela tb_pagar
+INSERT INTO tb_pagar (nm_tipo, ds_descricao, vl_valor, nm_metodo_pagar, nm_status) VALUES
+('saida', 'Pagamento de serviço', 100.00, 'Pix', 'Em atraso');
